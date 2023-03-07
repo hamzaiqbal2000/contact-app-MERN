@@ -1,15 +1,20 @@
-import React, {useState} from "react";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-const ContactForm = ({ formData, setFormData}) => {
-    const [id, setId] = useState(0)
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [phone, setPhone] = useState('')
+const ContactForm = () => {
+    const { name, email, phone} = useSelector((state) => ({
+      id: state.formReducer.id,
+      name: state.formReducer.name,
+      email: state.formReducer.email,
+      phone: state.formReducer.phone
+    }))
+
+    const dispatch = useDispatch()
     
     function submitHandler(e){
         e.preventDefault()
-        setId((prev) => prev + 1)
-        setFormData([...formData, {id, name, email, phone}])
+        dispatch({type: "INCREMENT_ID"})
+        dispatch({type: "FORM_DATA"})
     }
 
   return (
@@ -24,7 +29,7 @@ const ContactForm = ({ formData, setFormData}) => {
             placeholder="Name"
             id="exampleInputName1"
             aria-describedby="emailHelp"
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => dispatch({type: 'UPDATE_NAME', payload: e.target.value })}
           />
         </div>
         <div className="mb-3">
@@ -34,7 +39,7 @@ const ContactForm = ({ formData, setFormData}) => {
             className="form-control"
             placeholder="Email"
             id="exampleInputEmail1"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => dispatch({type: 'UPDATE_EMAIL', payload: e.target.value })}
           />
         </div>
         <div className="mb-3">
@@ -44,7 +49,7 @@ const ContactForm = ({ formData, setFormData}) => {
             className="form-control"
             placeholder="phone(XXXXXXXXXX)"
             id="exampleInputphone1"
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={(e) => dispatch({type: 'UPDATE_PHONE', payload: e.target.value })}
           />
         </div>
         <label>Contact Type</label>

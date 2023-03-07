@@ -1,6 +1,6 @@
 import React from "react";
-import logo from "../assets/logo.svg"
-import NavLinks from "../components/NavLinks";
+import logo from "../../assets/logo.svg"
+import NavLinks from "../../components/NavLinks";
 
 const Navbar = () => {
   return (

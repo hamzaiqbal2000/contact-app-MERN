@@ -16,10 +16,6 @@ const Card = ({userData, setData, data}) => {
 
     }
 
-    function handleEdit(){
-
-    }
-
     return (
         <div className="card mb-3">
             <div className="d-flex justify-content-between p-3">
@@ -46,7 +42,7 @@ const Card = ({userData, setData, data}) => {
                         <p className="card-text">{userData.phone}</p>
                     </div>
                     <div className="mt-4">
-                        <button className="btn btn-dark" onClick={handleEdit} >
+                        <button className="btn btn-dark" >
                             Edit
                         </button>
                         <button  className="btn btn-danger" onClick={handleDelete}>

@@ -1,9 +1,13 @@
 import React, {useState, useEffect} from "react";
-import Card from "../components/Card";
-import fetchData from '../utils/api'
+import Card from "../../components/Card";
+import fetchData from '../../utils/api'
+import { useSelector } from "react-redux";
 
-const CardList = ({formData}) => {
+const CardList = () => {
     const [data, setData] = useState([])
+    const {formData} = useSelector((state) => ({
+        formData: state.formReducer.formData,
+    }))
 
     useEffect(() => {
         fetchData().then((res) => {
@@ -26,7 +30,7 @@ const CardList = ({formData}) => {
             {data && data.map((res) => <Card key={res.id} userData={res} setData={setData} data={data} />)}
             
         </div>
-    );
+    );  
 };
 
 export default CardList;
