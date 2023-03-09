@@ -1,8 +1,10 @@
 import React from "react";
 import avatar from '../assets/index.jpg'
 import axios from 'axios'
+import { useNavigate } from "react-router-dom";
 
 const Card = ({userData, setData, data}) => {
+    const navigate = useNavigate()
 
     function handleDelete(){
         axios.delete(`https://dummyjson.com/users/${userData.id}`)
@@ -14,6 +16,10 @@ const Card = ({userData, setData, data}) => {
         })
         .catch(err => console.log("err", err))
 
+    }
+
+    function handleDetails(){
+        navigate(`/userdetails/${userData.id}`)
     }
 
     return (
@@ -45,8 +51,11 @@ const Card = ({userData, setData, data}) => {
                         <button className="btn btn-dark" >
                             Edit
                         </button>
-                        <button  className="btn btn-danger" onClick={handleDelete}>
+                        <button  className="btn btn-danger m-2" onClick={handleDelete}>
                             Delete
+                        </button>
+                        <button  className="btn btn-warning" onClick={handleDetails}>
+                            Details
                         </button>
                     </div>
                 </div>

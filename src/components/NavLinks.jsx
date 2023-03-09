@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const NavLinks = () => {
   return (
@@ -6,7 +7,7 @@ const NavLinks = () => {
       <div className="ml-auto d-flex align-items-center ">
         <ul className="navbar-nav">
           <li className="nav-item active ">
-            <h5 className="nav-link text-white">Hello</h5>
+            <Link to="/home" className="nav-link text-white">Home</Link>
           </li>
           <li className="nav-item">
             <h5 className="nav-link text-white">Sultans Dine</h5>
