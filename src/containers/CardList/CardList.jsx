@@ -1,28 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "../../components/Card";
-import fetchData from '../../utils/api'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUsers } from "../../actions/fetchUsers";
 
-const CardList = ({data, setData}) => {
-    const {formData} = useSelector((state) => ({
-        formData: state.formReducer.formData,
-    }))
+const CardList = () => {
+  const dispatch = useDispatch();
+  const { data, formData } = useSelector((state) => ({
+    data: state.getUsers.data,
+    formData: state.formReducer.formData,
+  }));
 
-    return (
-        <div className="col m-4" id="contain">
-            <div className="mb-3">
-                <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Filter Contacts..."
-                    id="exampleInputPassword1"
-                />
-            </div>
-            { formData.length > 0 && formData.map((obj) => <Card key={obj.id} userData={obj} /> ) }
-            {data && data.map((res) => <Card key={res.id} userData={res} setData={setData} data={data} />)}
-            
-        </div>
-    );  
+  useEffect(() => {
+    dispatch(fetchUsers());
+  }, []);
+
+  return (
+    <div className="col m-4" id="contain">
+      <div className="mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Filter Contacts..."
+          id="exampleInputPassword1"
+        />
+      </div>
+      {formData.length > 0 &&
+        formData.map((obj) => <Card key={obj.id} userData={obj} />)}
+      {data &&
+        data.map((res) => <Card key={res.id} userData={res} data={data} />)}
+    </div>
+  );
 };
 
 export default CardList;
