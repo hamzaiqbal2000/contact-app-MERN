@@ -2,20 +2,20 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const ContactForm = () => {
-    const { name, email, phone} = useSelector((state) => ({
-      id: state.formReducer.id,
-      name: state.formReducer.name,
-      email: state.formReducer.email,
-      phone: state.formReducer.phone
-    }))
+  const { name, email, phone } = useSelector((state) => ({
+    id: state.formReducer.id,
+    name: state.formReducer.name,
+    email: state.formReducer.email,
+    phone: state.formReducer.phone,
+  }));
 
-    const dispatch = useDispatch()
-    
-    function submitHandler(e){
-        e.preventDefault()
-        dispatch({type: "INCREMENT_ID"})
-        dispatch({type: "FORM_DATA"})
-    }
+  const dispatch = useDispatch();
+
+  function submitHandler(e) {
+    e.preventDefault();
+    dispatch({ type: "INCREMENT_ID" });
+    dispatch({ type: "FORM_DATA" });
+  }
 
   return (
     <div className="col m-4">
@@ -29,7 +29,9 @@ const ContactForm = () => {
             placeholder="Name"
             id="exampleInputName1"
             aria-describedby="emailHelp"
-            onChange={(e) => dispatch({type: 'UPDATE_NAME', payload: e.target.value })}
+            onChange={(e) =>
+              dispatch({ type: "UPDATE_NAME", payload: e.target.value })
+            }
           />
         </div>
         <div className="mb-3">
@@ -39,7 +41,9 @@ const ContactForm = () => {
             className="form-control"
             placeholder="Email"
             id="exampleInputEmail1"
-            onChange={(e) => dispatch({type: 'UPDATE_EMAIL', payload: e.target.value })}
+            onChange={(e) =>
+              dispatch({ type: "UPDATE_EMAIL", payload: e.target.value })
+            }
           />
         </div>
         <div className="mb-3">
@@ -49,7 +53,9 @@ const ContactForm = () => {
             className="form-control"
             placeholder="phone(XXXXXXXXXX)"
             id="exampleInputphone1"
-            onChange={(e) => dispatch({type: 'UPDATE_PHONE', payload: e.target.value })}
+            onChange={(e) =>
+              dispatch({ type: "UPDATE_PHONE", payload: e.target.value })
+            }
           />
         </div>
         <label>Contact Type</label>
@@ -61,9 +67,7 @@ const ContactForm = () => {
             id="flexRadioDefault1"
             value="Personal"
           />
-          <label className="form-check-label">
-            Personal
-          </label>
+          <label className="form-check-label">Personal</label>
         </div>
         <div className="form-check">
           <input
@@ -73,9 +77,7 @@ const ContactForm = () => {
             id="flexRadioDefault2"
             value="Professional"
           />
-          <label className="form-check-label">
-            Professional
-          </label>
+          <label className="form-check-label">Professional</label>
         </div>
         <div className="mb-3 mt-3">
           <input className="form-control" type="file" id="formFile" />
@@ -91,8 +93,6 @@ const ContactForm = () => {
         </button>
         {/* <button type="button" id="myBtn" className="btn btn-primary d-none" onclick="editCard()">Edit User</button> */}
       </form>
-
-      
     </div>
   );
 };

@@ -1,20 +1,20 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-const UserDetail = ({ data }) => {
-  const [user, setUser] = useState([])
+const UserDetail = () => {
+  const [user, setUser] = useState([]);
   const { userId } = useParams();
 
   useEffect(() => {
-    function run(){
-        console.log("userid", userId)
-        setUser(data.filter((user) => user.id == userId))
-        console.log("filter", data.filter((user) => user.id == userId))
+    async function run() {
+      const response = await axios.get(`https://dummyjson.com/users/${userId}`);
+      console.log(response);
+      setUser(response.data);
     }
-    run()
-  }, [])
+    run();
+  }, [userId]);
 
-  
   return (
     <table className="table table-sm w-50 mt-5 align-items-center">
       <thead>
@@ -26,15 +26,15 @@ const UserDetail = ({ data }) => {
       <tbody>
         <tr>
           <th scope="row">Name</th>
-          <td>{user[0] && user[0].firstName}</td>
+          <td>{user && user.firstName}</td>
         </tr>
         <tr>
           <th scope="row">Email</th>
-          <td>{user[0] && user[0].email}</td>
+          <td>{user && user.email}</td>
         </tr>
         <tr>
           <th scope="row">Phone</th>
-          <td>{user[0] && user[0].phone}</td>
+          <td>{user && user.phone}</td>
         </tr>
       </tbody>
     </table>
