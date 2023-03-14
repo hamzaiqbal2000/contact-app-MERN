@@ -4,30 +4,18 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 
-// async function fetchUserDetails(userId) {
-//   return await axios.get(`https://dummyjson.com/users/${userId}`);
-// }
+async function fetchUserDetails(userId) {
+  const response = await axios.get(`https://dummyjson.com/users/${userId}`);
+  return response.data;
+}
 
 const UserDetail = () => {
   const { userId } = useParams();
 
   const { isLoading, isError, data, error } = useQuery({
     queryKey: ["userDetail", userId],
-    queryFn: async () => {
-      const response = await axios.get(`https://dummyjson.com/users/${userId}`);
-      console.log(response.data);
-      return response.data;
-    },
+    queryFn: async () => await fetchUserDetails(userId),
   });
-
-  // useEffect(() => {
-  //   async function run() {
-  //     const response = await axios.get(`https://dummyjson.com/users/${userId}`);
-  //     console.log(response);
-  //     setUser(response.data);
-  //   }
-  //   run();
-  // }, [userId]);
 
   if (isLoading) {
     return <span>Loading...</span>;
