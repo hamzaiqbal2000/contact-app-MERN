@@ -1,10 +1,7 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import useUserData from "../../custom hooks/useUserData";
 
-const ContactForm = ({ toggle, setToggle }) => {
+const ContactForm = ({ mutation }) => {
   const { id, name, email, phone } = useSelector((state) => ({
     id: state.formReducer.id,
     name: state.formReducer.name,
@@ -14,22 +11,7 @@ const ContactForm = ({ toggle, setToggle }) => {
 
   const dispatch = useDispatch();
 
-  const mutation = useMutation({
-    mutationFn: () => {
-      return axios.post(`http://localhost:4000/addUsers`, {
-        id: id,
-        name: name,
-        email: email,
-        phone: phone,
-      });
-    },
-    onSuccess: (successData) => {
-      console.log("successData", successData);
-      setToggle(!toggle);
-    },
-  });
-
-  async function submitHandler(e) {
+  function submitHandler(e) {
     e.preventDefault();
     dispatch({ type: "INCREMENT_ID" });
     mutation.mutate();

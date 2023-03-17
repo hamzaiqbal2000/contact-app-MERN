@@ -10,7 +10,7 @@ async function fetchFormUserDetails() {
 
 const useUserData = (toggle) => {
   return useQuery({
-    queryKey: ["formDataDetail", toggle],
+    queryKey: ["formDataDetail"],
     queryFn: async () => await fetchFormUserDetails(),
   });
 };
