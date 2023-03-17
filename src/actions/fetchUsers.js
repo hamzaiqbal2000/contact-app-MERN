@@ -10,7 +10,7 @@ export const fetchUsers = () => {
     try {
       dispatch({ type: FETCH_USER_REQUEST });
       const response = await axios.get(`http://localhost:4000/getUsers`);
-      console.log(response);
+      console.log("getUsersJSON ", response);
       dispatch({ type: FETCH_USER_SUCCESS, payload: response.data });
     } catch (error) {
       dispatch({ type: FETCH_USER_FAILURE, error: error.message });

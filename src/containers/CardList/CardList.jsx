@@ -2,17 +2,27 @@ import React, { useEffect } from "react";
 import Card from "../../components/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUsers } from "../../actions/fetchUsers";
+import useUserData from "../../custom hooks/useUserData";
 
-const CardList = () => {
+const CardList = ({ toggle }) => {
   const dispatch = useDispatch();
-  const { data, formData } = useSelector((state) => ({
-    data: state.getUsers.data,
-    formData: state.formReducer.formData,
+  const { trueData } = useSelector((state) => ({
+    trueData: state.getUsers.data,
   }));
+
+  const { isLoading, isError, data, error } = useUserData(toggle);
 
   useEffect(() => {
     dispatch(fetchUsers());
   }, []);
+
+  if (isLoading) {
+    return <span>Loading...</span>;
+  }
+
+  if (isError) {
+    return <span>Error: {error.message}</span>;
+  }
 
   return (
     <div className="col m-4" id="contain">
@@ -24,10 +34,14 @@ const CardList = () => {
           id="exampleInputPassword1"
         />
       </div>
-      {formData.length > 0 &&
-        formData.map((obj) => <Card key={obj.id} userData={obj} />)}
       {data &&
-        data.map((res) => <Card key={res.id} userData={res} data={data} />)}
+        data
+          .slice(0)
+          .reverse()
+          .map((obj) => <Card userData={obj} data={data} />)}
+
+      {trueData &&
+        trueData.map((res) => <Card key={res.id} userData={res} data={data} />)}
     </div>
   );
 };
