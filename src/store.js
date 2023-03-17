@@ -6,7 +6,7 @@ import {
 } from "redux";
 import thunk from "redux-thunk";
 import formReducer from "./containers/ContactForm/contactForm.reducer";
-import getUsers from "./reducers/fetchUsers.reducer";
+import { getUsers } from "./reducers/fetchUsers.reducer";
 
 const composedEnhancer = compose(
   applyMiddleware(thunk),
