@@ -3,12 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 async function fetchFormUserDetails() {
-  const response = await axios.get(`http://localhost:4000/addFormUsers`);
+  const response = await axios.get(`http://localhost:4000/getUsers`);
   console.log("response ", response.data);
   return response.data;
 }
 
-const useUserData = (toggle) => {
+const useUserData = () => {
   return useQuery({
     queryKey: ["formDataDetail"],
     queryFn: async () => await fetchFormUserDetails(),

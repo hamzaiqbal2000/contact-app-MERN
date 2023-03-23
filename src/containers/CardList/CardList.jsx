@@ -1,20 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Card from "../../components/Card";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers } from "../../actions/fetchUsers";
+
 import useUserData from "../../custom hooks/useUserData";
 
 const CardList = ({ toggle }) => {
-  const dispatch = useDispatch();
-  const { trueData } = useSelector((state) => ({
-    trueData: state.getUsers.data,
-  }));
-
   const { isLoading, isError, data, error } = useUserData(toggle);
-
-  useEffect(() => {
-    dispatch(fetchUsers());
-  }, []);
 
   if (isLoading) {
     return <span>Loading...</span>;
@@ -39,9 +29,6 @@ const CardList = ({ toggle }) => {
           .slice(0)
           .reverse()
           .map((obj) => <Card userData={obj} data={data} />)}
-
-      {trueData &&
-        trueData.map((res) => <Card key={res.id} userData={res} data={data} />)}
     </div>
   );
 };
