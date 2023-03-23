@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import CardList from "../containers/CardList/CardList";
 import ContactForm from "../containers/ContactForm/ContactForm";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import queryClient from "../query-client-provider";
 
 const Home = () => {
-  const [toggle, setToggle] = useState(false);
   const { id, name, email, phone } = useSelector((state) => ({
     id: state.formReducer.id,
     name: state.formReducer.name,

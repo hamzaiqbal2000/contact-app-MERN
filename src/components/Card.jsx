@@ -5,24 +5,27 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { DELETE_USER } from "../actions/fetchUsers";
+import queryClient from "../query-client-provider";
 
 const Card = ({ userData, data }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const mutation = useMutation({
-    mutationFn: (userData) => {
-      return axios.delete(`https://dummyjson.com/users/${userData.id}`);
+    mutationFn: (id) => {
+      return axios.delete(`http://localhost:4000/deleteUser/${id}`);
     },
     onSuccess: (successData) => {
-      if (successData.data.isDeleted) {
-        dispatch({ type: DELETE_USER, payload: userData.id });
-      }
+      console.log("Delete successData", successData);
+      queryClient.invalidateQueries("formDataDetail", { refetchActive: true });
+      // if (successData.data.isDeleted) {
+      //   dispatch({ type: DELETE_USER, payload: userData.id });
+      // }
     },
   });
 
   function deleteCard() {
-    mutation.mutate(userData);
+    mutation.mutate(userData.id);
     alert("Card item deleted");
   }
 

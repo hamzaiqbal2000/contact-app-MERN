@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 const ContactForm = ({ mutation }) => {
-  const { id, name, email, phone } = useSelector((state) => ({
-    id: state.formReducer.id,
+  const { name, email, phone } = useSelector((state) => ({
     name: state.formReducer.name,
     email: state.formReducer.email,
     phone: state.formReducer.phone,
