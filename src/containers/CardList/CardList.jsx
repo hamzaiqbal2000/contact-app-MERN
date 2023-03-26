@@ -1,7 +1,8 @@
 import React from "react";
-import Card from "../../components/Card";
+import Card from "../Card/Card";
 
 import useUserData from "../../custom hooks/useUserData";
+import Search from "../../components/Search";
 
 const CardList = ({ toggle }) => {
   const { isLoading, isError, data, error } = useUserData(toggle);
@@ -16,14 +17,7 @@ const CardList = ({ toggle }) => {
 
   return (
     <div className="col m-4" id="contain">
-      <div className="mb-3">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Filter Contacts..."
-          id="exampleInputPassword1"
-        />
-      </div>
+      <Search />
       {data &&
         data
           .slice(0)
