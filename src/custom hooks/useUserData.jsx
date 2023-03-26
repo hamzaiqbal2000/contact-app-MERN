@@ -1,12 +1,5 @@
-import React from "react";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
-
-async function fetchFormUserDetails() {
-  const response = await axios.get(`http://localhost:4000/getUsers`);
-  console.log("response ", response.data);
-  return response.data;
-}
+import { fetchFormUserDetails } from "../utils/api";
 
 const useUserData = () => {
   return useQuery({

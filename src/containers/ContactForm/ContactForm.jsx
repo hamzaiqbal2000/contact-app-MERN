@@ -1,7 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import useAddUserMutation from "../../custom hooks/useAddUserMutation";
 
-const ContactForm = ({ mutation }) => {
+const ContactForm = () => {
   const { name, email, phone } = useSelector((state) => ({
     name: state.formReducer.name,
     email: state.formReducer.email,
@@ -9,12 +10,11 @@ const ContactForm = ({ mutation }) => {
   }));
 
   const dispatch = useDispatch();
+  const mutation = useAddUserMutation();
 
   function submitHandler(e) {
     e.preventDefault();
-    dispatch({ type: "INCREMENT_ID" });
-    mutation.mutate();
-    // dispatch({ type: "FORM_DATA" });
+    mutation.mutate({ name, email, phone });
   }
 
   return (

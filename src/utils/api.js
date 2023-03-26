@@ -1,8 +1,7 @@
 import axios from "axios";
 
-export default function fetchData() {
-  return axios
-    .get(`https://dummyjson.com/users`)
-    .then((res) => res)
-    .catch((err) => console.log(err));
+export async function fetchFormUserDetails() {
+  const response = await axios.get(`http://localhost:4000/getUsers`);
+  console.log("response ", response.data);
+  return response.data;
 }
