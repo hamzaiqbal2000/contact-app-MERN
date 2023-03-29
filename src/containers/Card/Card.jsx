@@ -10,7 +10,7 @@ const Card = ({ userData }) => {
 
   const mutation = useMutation({
     mutationFn: (id) => {
-      return axios.delete(`http://localhost:4000/deleteUser/${id}`);
+      return axios.delete(`http://127.0.0.1:4000/deleteUser/${id}`);
     },
     onSuccess: (successData) => {
       console.log("Delete successData", successData);

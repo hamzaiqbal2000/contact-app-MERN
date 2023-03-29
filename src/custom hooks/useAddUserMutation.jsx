@@ -5,7 +5,7 @@ import queryClient from "../query-client-provider";
 const useAddUserMutation = () => {
   const mutation = useMutation({
     mutationFn: async ({ name, email, phone }) => {
-      return axios.post(`http://localhost:4000/addUsers`, {
+      return axios.post(`http://127.0.0.1:4000/addUsers`, {
         name: name,
         email: email,
         phone: phone,

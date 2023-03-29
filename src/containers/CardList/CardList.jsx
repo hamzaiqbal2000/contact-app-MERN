@@ -22,7 +22,7 @@ const CardList = ({ toggle }) => {
         data
           .slice(0)
           .reverse()
-          .map((obj) => <Card userData={obj} data={data} />)}
+          .map((obj) => <Card userData={obj} data={data} key={obj.id} />)}
     </div>
   );
 };
