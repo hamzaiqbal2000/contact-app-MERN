@@ -7,19 +7,19 @@ To install and run the application, follow these steps:
 
 Clone the repository using the following command:
 
-git clone https://github.com/hamzaiqbal2000/contact-app-frontend.git
+    git clone https://github.com/hamzaiqbal2000/contact-app-frontend.git
 
 Navigate to the project directory:
 
-cd contact-app-frontend
+    cd contact-app-frontend
 
 Install the required packages using the following command:
 
-npm install
+    npm install
 
 Start the server using the following command:
 
-npm start
+    npm start
 
 The server will start on port 3000.
 
